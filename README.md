@@ -1,2 +1,2 @@
 # LearnAngular
-Learning Angular 10
+Learning Angular

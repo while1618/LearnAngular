@@ -1,2 +1,6 @@
-<p>Server Component</p>
-<p>Server with ID {{ this.serverId }} is {{ getServerStatus() }}</p>
+<p
+  [ngStyle]="{ color: getColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
+  Server with ID {{ this.serverId }} is {{ getServerStatus() }}
+</p>

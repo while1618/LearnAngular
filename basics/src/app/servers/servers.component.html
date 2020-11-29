@@ -18,7 +18,14 @@
 >
   Add Server
 </button>
-<p>{{ serverCreationStatus }}</p>
+
+<ng-container *ngIf="serverCreated; else elseTemplate">
+  <p>Server was created! Server name is {{ serverName }}</p>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>No server was created</p>
+</ng-template>
+
 <label for="username">Username</label>
 <input type="text" id="username" class="form-control" [(ngModel)]="username" />
 <p>{{ username }}</p>
@@ -29,5 +36,16 @@
 >
   Reset User
 </button>
-<app-server></app-server>
-<app-server></app-server>
+
+<app-server *ngFor="let server of servers"></app-server>
+
+<button class="btn btn-primary" (click)="toggle()">Display Details</button>
+<p *ngIf="showDetails">Details</p>
+
+<p
+  *ngFor="let l of log; let i = index"
+  [ngStyle]="{ color: i >= 4 ? 'red' : '' }"
+  [ngClass]="{ log: i >= 4 }"
+>
+  {{ l }}
+</p>

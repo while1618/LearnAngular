@@ -5,6 +5,9 @@
 	},
 	{
 		"path": "project"
+	},
+	{
+		"path": "cmp-databinding-start"
 	}
 ],
   "settings": {}

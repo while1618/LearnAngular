@@ -8,6 +8,9 @@
 	},
 	{
 		"path": "cmp-databinding-start"
+	},
+	{
+		"path": "directives-start"
 	}
 ],
   "settings": {}

@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-5">
-    <app-recipe-list (recipeDetails)="details = $event"></app-recipe-list>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <ng-container *ngIf="details; else elseTemplate">
-      <app-recipe-details [recipe]="details"></app-recipe-details>
+    <ng-container *ngIf="selectedRecipe; else elseTemplate">
+      <app-recipe-details [recipe]="selectedRecipe"></app-recipe-details>
     </ng-container>
     <ng-template #elseTemplate> Recipe not selected! </ng-template>
   </div>

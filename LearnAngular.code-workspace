@@ -11,6 +11,9 @@
 	},
 	{
 		"path": "directives-start"
+	},
+	{
+		"path": "routing-start"
 	}
 ],
   "settings": {}

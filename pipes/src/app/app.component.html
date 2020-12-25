@@ -1,0 +1,90 @@
+<div class="container">
+  <h3>Payment Form</h3>
+
+  <div class="row">
+    <div class="form-group col">
+      <label>Payee Name</label>
+      <input
+        class="form-control"
+        type="text"
+        (input)="onNameChange($event.target.value)"
+      />
+    </div>
+    <div class="col">
+      <label><strong>Name</strong></label>
+      <div>
+        {{ name | titlecase }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      <label>Payment Date</label>
+      <input
+        class="form-control"
+        type="date"
+        (input)="onDateChange($event.target.value)"
+      />
+    </div>
+    <div class="col">
+      <label><strong>Payment Date</strong></label>
+      <div>
+        {{ date | date: "dd.MM.yyyy" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      <label>Payment Amount</label>
+      <input
+        class="form-control"
+        type="text"
+        (input)="onAmountChange($event.target.value)"
+      />
+    </div>
+    <div class="col">
+      <label><strong>Payment Amount</strong></label>
+      <div>
+        {{ amount | currency }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      <label>Height</label>
+      <input
+        class="form-control"
+        type="text"
+        (input)="onHeightChange($event.target.value)"
+      />
+    </div>
+    <div class="col">
+      <label><strong>Height</strong></label>
+      <div>
+        {{ height | number: "1.1-3" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      <label>Miles</label>
+      <input
+        class="form-control"
+        type="text"
+        (input)="onMilesChange($event.target.value)"
+      />
+    </div>
+    <div class="col">
+      <label><strong>Kilometers</strong></label>
+      <div *ngIf="(miles | convert: 'km') > 10">
+        {{ miles | convert: "m" }}
+      </div>
+    </div>
+  </div>
+
+  {{ car | json }}
+</div>

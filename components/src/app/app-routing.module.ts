@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('../app/views/views.module').then((m) => m.ViewsModule),
   },
+  {
+    path: 'mods',
+    loadChildren: () =>
+      import('../app/mods/mods.module').then((m) => m.ModsModule),
+  },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent },
 ];

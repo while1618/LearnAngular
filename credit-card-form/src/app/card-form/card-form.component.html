@@ -1,0 +1,20 @@
+<form [formGroup]="cardForm">
+  <app-input [control]="cardForm.get('name')" [label]="'Name'"></app-input>
+  <app-input
+    [control]="cardForm.get('cardNumber')"
+    [label]="'Card Number'"
+  ></app-input>
+  <app-input
+    [control]="cardForm.get('expiration')"
+    [label]="'Expiration'"
+  ></app-input>
+  <app-input
+    [control]="cardForm.get('securityCode')"
+    [label]="'Security Code'"
+  ></app-input>
+</form>
+
+<hr />
+<div>Form Contents: {{ cardForm.value | json }}</div>
+<div>Form is valid: {{ cardForm.valid }}</div>
+<div>Errors around name: {{ cardForm.get("name").errors | json }}</div>

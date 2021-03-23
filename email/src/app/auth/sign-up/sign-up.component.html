@@ -24,9 +24,9 @@
     class="ui red basic label"
   >
     <p *ngIf="signUpForm.errors.passwordsDoNotMatch">Passwords do not match.</p>
+    <p *ngIf="signUpForm.errors.unknownError">Unknown error.</p>
   </div>
   <div>
     <button class="ui submit button primary">Sign Up</button>
   </div>
-  <p *ngIf="signUpForm.errors.unknownError">Unknown error.</p>
 </form>

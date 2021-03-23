@@ -1,5 +1,5 @@
 <h3>Create an Account</h3>
-<form class="ui form" [formGroup]="signUpForm">
+<form (ngSubmit)="onSubmit()" class="ui form" [formGroup]="signUpForm">
   <app-input
     type="text"
     label="Username"
@@ -28,4 +28,5 @@
   <div>
     <button class="ui submit button primary">Sign Up</button>
   </div>
+  <p *ngIf="signUpForm.errors.unknownError">Unknown error.</p>
 </form>

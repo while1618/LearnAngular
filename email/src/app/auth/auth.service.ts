@@ -65,17 +65,25 @@ export class AuthService {
       })
       .pipe(
         tap(({ authenticated }) => {
-          if (authenticated) this.signedIn$.next(true);
+          this.signedIn$.next(authenticated);
         })
       );
   }
 
   signOut() {
-    return this.httpClient.post(`${AuthService.API_URL}/signout`, {}).pipe(
-      tap(() => {
-        this.signedIn$.next(false);
-      })
-    );
+    return this.httpClient
+      .post(
+        `${AuthService.API_URL}/signout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        tap(() => {
+          this.signedIn$.next(false);
+        })
+      );
   }
 
   signIn(credentials: SignInRequest) {

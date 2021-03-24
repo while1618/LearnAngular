@@ -59,9 +59,17 @@ export class AuthService {
         withCredentials: true,
       })
       .pipe(
-        tap((response) => {
-          console.log(response);
+        tap(({ authenticated }) => {
+          if (authenticated) this.signedIn$.next(true);
         })
       );
+  }
+
+  signOut() {
+    return this.httpClient.post(`${AuthService.API_URL}/signout`, {}).pipe(
+      tap(() => {
+        this.signedIn$.next(false);
+      })
+    );
   }
 }

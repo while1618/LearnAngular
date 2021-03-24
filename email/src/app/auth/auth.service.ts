@@ -22,6 +22,11 @@ interface CheckAuthResponse {
   username: string;
 }
 
+interface SignInRequest {
+  username: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -71,5 +76,15 @@ export class AuthService {
         this.signedIn$.next(false);
       })
     );
+  }
+
+  signIn(credentials: SignInRequest) {
+    return this.httpClient
+      .post(`${AuthService.API_URL}/signin`, credentials)
+      .pipe(
+        tap(() => {
+          this.signedIn$.next(true);
+        })
+      );
   }
 }

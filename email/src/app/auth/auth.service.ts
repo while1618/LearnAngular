@@ -33,7 +33,7 @@ interface SignInRequest {
 export class AuthService {
   private static API_URL = 'https://api.angular-email.com/auth';
 
-  signedIn$ = new BehaviorSubject(false);
+  signedIn$ = new BehaviorSubject(null);
 
   constructor(private httpClient: HttpClient) {}
 

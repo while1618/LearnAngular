@@ -42,6 +42,7 @@ export class AuthService {
       `${AuthService.API_URL}/username`,
       {
         username: username,
+        withCredentials: true,
       }
     );
   }
@@ -88,7 +89,9 @@ export class AuthService {
 
   signIn(credentials: SignInRequest) {
     return this.httpClient
-      .post(`${AuthService.API_URL}/signin`, credentials)
+      .post(`${AuthService.API_URL}/signin`, credentials, {
+        withCredentials: true,
+      })
       .pipe(
         tap(() => {
           this.signedIn$.next(true);

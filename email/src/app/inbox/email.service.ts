@@ -17,10 +17,7 @@ export class EmailService {
 
   getEmails() {
     return this.httpClient.get<EmailsResponse[]>(
-      `${EmailService.API_URL}/emails`,
-      {
-        withCredentials: true,
-      }
+      `${EmailService.API_URL}/emails`
     );
   }
 }

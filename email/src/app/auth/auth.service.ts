@@ -42,16 +42,13 @@ export class AuthService {
       `${AuthService.API_URL}/username`,
       {
         username: username,
-        withCredentials: true,
       }
     );
   }
 
   signUp(credentials: SignUpRequest) {
     return this.httpClient
-      .post<SignUpResponse>(`${AuthService.API_URL}/signup`, credentials, {
-        withCredentials: true,
-      })
+      .post<SignUpResponse>(`${AuthService.API_URL}/signup`, credentials)
       .pipe(
         tap(() => {
           this.signedIn$.next(true);
@@ -61,9 +58,7 @@ export class AuthService {
 
   checkAuth() {
     return this.httpClient
-      .get<CheckAuthResponse>(`${AuthService.API_URL}/signedin`, {
-        withCredentials: true,
-      })
+      .get<CheckAuthResponse>(`${AuthService.API_URL}/signedin`)
       .pipe(
         tap(({ authenticated }) => {
           this.signedIn$.next(authenticated);
@@ -72,26 +67,16 @@ export class AuthService {
   }
 
   signOut() {
-    return this.httpClient
-      .post(
-        `${AuthService.API_URL}/signout`,
-        {},
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(
-        tap(() => {
-          this.signedIn$.next(false);
-        })
-      );
+    return this.httpClient.post(`${AuthService.API_URL}/signout`, {}).pipe(
+      tap(() => {
+        this.signedIn$.next(false);
+      })
+    );
   }
 
   signIn(credentials: SignInRequest) {
     return this.httpClient
-      .post(`${AuthService.API_URL}/signin`, credentials, {
-        withCredentials: true,
-      })
+      .post(`${AuthService.API_URL}/signin`, credentials)
       .pipe(
         tap(() => {
           this.signedIn$.next(true);

@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Email } from './email';
 
 interface EmailsResponse {
   id: string;
   subject: string;
   from: string;
 }
-
 @Injectable({
   providedIn: 'root',
 })
@@ -19,5 +19,9 @@ export class EmailService {
     return this.httpClient.get<EmailsResponse[]>(
       `${EmailService.API_URL}/emails`
     );
+  }
+
+  getEmail(id: string) {
+    return this.httpClient.get<Email>(`${EmailService.API_URL}/emails/${id}`);
   }
 }

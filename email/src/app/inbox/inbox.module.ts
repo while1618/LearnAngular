@@ -9,13 +9,18 @@ import { EmailIndexComponent } from './email-index/email-index.component';
 import { EmailShowComponent } from './email-show/email-show.component';
 import { EmailPlaceholderComponent } from './email-placeholder/email-placeholder.component';
 import { EmailNotFoundComponent } from './email-not-found/email-not-found.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [HomeComponent, EmailCreateComponent, EmailReplyComponent, EmailIndexComponent, EmailShowComponent, EmailPlaceholderComponent, EmailNotFoundComponent],
-  imports: [
-    CommonModule,
-    InboxRoutingModule
-  ]
+  declarations: [
+    HomeComponent,
+    EmailCreateComponent,
+    EmailReplyComponent,
+    EmailIndexComponent,
+    EmailShowComponent,
+    EmailPlaceholderComponent,
+    EmailNotFoundComponent,
+  ],
+  imports: [CommonModule, InboxRoutingModule, SharedModule],
 })
-export class InboxModule { }
+export class InboxModule {}

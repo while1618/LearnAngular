@@ -16,6 +16,9 @@ interface SignUpRequest {
 interface SignUpResponse {
   username: string;
 }
+interface SignInResponse {
+  username: string;
+}
 
 interface CheckAuthResponse {
   authenticated: boolean;
@@ -34,6 +37,7 @@ export class AuthService {
   private static API_URL = 'https://api.angular-email.com/auth';
 
   signedIn$ = new BehaviorSubject(null);
+  username = '';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -50,8 +54,9 @@ export class AuthService {
     return this.httpClient
       .post<SignUpResponse>(`${AuthService.API_URL}/signup`, credentials)
       .pipe(
-        tap(() => {
+        tap(({ username }) => {
           this.signedIn$.next(true);
+          this.username = username;
         })
       );
   }
@@ -60,8 +65,9 @@ export class AuthService {
     return this.httpClient
       .get<CheckAuthResponse>(`${AuthService.API_URL}/signedin`)
       .pipe(
-        tap(({ authenticated }) => {
+        tap(({ authenticated, username }) => {
           this.signedIn$.next(authenticated);
+          this.username = username;
         })
       );
   }
@@ -76,10 +82,11 @@ export class AuthService {
 
   signIn(credentials: SignInRequest) {
     return this.httpClient
-      .post(`${AuthService.API_URL}/signin`, credentials)
+      .post<SignInResponse>(`${AuthService.API_URL}/signin`, credentials)
       .pipe(
-        tap(() => {
+        tap(({ username }) => {
           this.signedIn$.next(true);
+          this.username = username;
         })
       );
   }

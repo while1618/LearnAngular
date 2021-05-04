@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { Car } from '../models/car';
+import { Car } from "../models/car";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CarsService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   all() {
-    return this.httpClient.get<Car[]>('http://localhost:4250/cars');
+    return this.httpClient.get<Car[]>("http://localhost:3000/cars");
   }
 
   one(carId: number) {
-    return this.httpClient.get<Car>(`http://localhost:4250/cars/${encodeURIComponent(String(carId))}`);
+    return this.httpClient.get<Car>(
+      `http://localhost:3000/cars/${encodeURIComponent(String(carId))}`
+    );
   }
 }

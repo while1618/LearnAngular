@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { ShoppingReducer } from './store/reducers/shopping.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { ShoppingEffects } from './store/effects/shopping.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +17,12 @@ import { environment } from '../environments/environment';
     BrowserModule,
     StoreModule.forRoot({ shopping: ShoppingReducer }),
     FormsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([ShoppingEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

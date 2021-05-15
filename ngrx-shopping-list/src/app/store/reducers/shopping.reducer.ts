@@ -1,6 +1,14 @@
+import { createReducer, on } from '@ngrx/store';
 import {
-  ShoppingAction,
-  ShoppingActionTypes,
+  AddItemAction,
+  AddItemFailureAction,
+  AddItemSuccessAction,
+  DeleteItemAction,
+  DeleteItemFailureAction,
+  DeleteItemSuccessAction,
+  LoadShoppingAction,
+  LoadShoppingFailureAction,
+  LoadShoppingSuccessAction,
 } from '../actions/shopping.actions';
 import { ShoppingItem } from '../models/shopping-item.model';
 
@@ -16,63 +24,48 @@ const initialState: ShoppingState = {
   error: undefined,
 };
 
-export function ShoppingReducer(
-  state: ShoppingState = initialState,
-  action: ShoppingAction
-) {
-  switch (action.type) {
-    case ShoppingActionTypes.LOAD_SHOPPING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case ShoppingActionTypes.LOAD_SHOPPING_SUCCESS:
-      return {
-        ...state,
-        list: action.payload,
-        loading: false,
-      };
-    case ShoppingActionTypes.LOAD_SHOPPING_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
-    case ShoppingActionTypes.ADD_ITEM:
-      return {
-        ...state,
-        loading: true,
-      };
-    case ShoppingActionTypes.ADD_ITEM_SUCCESS:
-      return {
-        ...state,
-        list: [...state.list, action.payload],
-        loading: false,
-      };
-    case ShoppingActionTypes.ADD_ITEM_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
-    case ShoppingActionTypes.DELETE_ITEM:
-      return {
-        ...state,
-        loading: true,
-      };
-    case ShoppingActionTypes.DELETE_ITEM_SUCCESS:
-      return {
-        ...state,
-        list: state.list.filter((item) => item.id !== action.payload),
-        loading: false,
-      };
-    case ShoppingActionTypes.DELETE_ITEM_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
-    default:
-      return state;
-  }
-}
+export const ShoppingReducer = createReducer<ShoppingState>(
+  initialState,
+  on(LoadShoppingAction, (state, action) => ({
+    ...state,
+    loading: true,
+  })),
+  on(LoadShoppingSuccessAction, (state, action) => ({
+    ...state,
+    list: action.shoppingList,
+    loading: false,
+  })),
+  on(LoadShoppingFailureAction, (state, action) => ({
+    ...state,
+    error: action.error,
+    loading: false,
+  })),
+  on(AddItemAction, (state, action) => ({
+    ...state,
+    loading: true,
+  })),
+  on(AddItemSuccessAction, (state, action) => ({
+    ...state,
+    list: [...state.list, action.shoppingItem],
+    loading: false,
+  })),
+  on(AddItemFailureAction, (state, action) => ({
+    ...state,
+    error: action.error,
+    loading: false,
+  })),
+  on(DeleteItemAction, (state, action) => ({
+    ...state,
+    loading: true,
+  })),
+  on(DeleteItemSuccessAction, (state, action) => ({
+    ...state,
+    list: state.list.filter((item) => item.id !== action.itemId),
+    loading: false,
+  })),
+  on(DeleteItemFailureAction, (state, action) => ({
+    ...state,
+    error: action.error,
+    loading: false,
+  }))
+);

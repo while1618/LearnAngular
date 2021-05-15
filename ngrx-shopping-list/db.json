@@ -1,8 +1,12 @@
 {
   "shopping": [
     {
-      "id": "01e73900-9e61-4dab-a7f6-9195d265476e",
-      "name": "Test"
+      "id": "b483b7be-635a-4b62-aac9-d052129878ea",
+      "name": "Tequila"
+    },
+    {
+      "id": "b8af50cc-6636-4400-bc4f-e7fba969a557",
+      "name": "Beer"
     }
   ]
 }

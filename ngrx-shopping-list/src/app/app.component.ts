@@ -27,16 +27,16 @@ export class AppComponent implements OnInit {
     this.shoppingItems$ = this.store.select((store) => store.shopping.list);
     this.loading$ = this.store.select((store) => store.shopping.loading);
     this.error$ = this.store.select((store) => store.shopping.error);
-    this.store.dispatch(new LoadShoppingAction());
+    this.store.dispatch(LoadShoppingAction());
   }
 
   addItem() {
     this.newShoppingItem.id = uuid();
-    this.store.dispatch(new AddItemAction(this.newShoppingItem));
+    this.store.dispatch(AddItemAction({ shoppingItem: this.newShoppingItem }));
     this.newShoppingItem = { id: '', name: '' };
   }
 
   deleteItem(id: string) {
-    this.store.dispatch(new DeleteItemAction(id));
+    this.store.dispatch(DeleteItemAction({ itemId: id }));
   }
 }

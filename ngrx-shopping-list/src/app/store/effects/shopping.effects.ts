@@ -5,12 +5,12 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ShoppingService } from 'src/app/shopping.service';
 import { errorOccurred } from '../actions/error.actions';
 import {
-  AddItemAction,
-  AddItemSuccessAction,
-  DeleteItemAction,
-  DeleteItemSuccessAction,
-  LoadShoppingAction,
-  LoadShoppingSuccessAction,
+  addItemAction,
+  addItemSuccessAction,
+  deleteItemAction,
+  deleteItemSuccessAction,
+  loadShoppingAction,
+  loadShoppingSuccessAction,
 } from '../actions/shopping.actions';
 
 @Injectable()
@@ -22,10 +22,10 @@ export class ShoppingEffects {
 
   loadShopping$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LoadShoppingAction),
+      ofType(loadShoppingAction),
       mergeMap(() =>
         this.shoppingService.getShoppingItem().pipe(
-          map((data) => LoadShoppingSuccessAction({ shoppingList: data })),
+          map((data) => loadShoppingSuccessAction({ shoppingList: data })),
           catchError((error) => of(errorOccurred({ error })))
         )
       )
@@ -34,10 +34,10 @@ export class ShoppingEffects {
 
   addShoppingItem$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AddItemAction),
+      ofType(addItemAction),
       mergeMap((data) =>
         this.shoppingService.addShoppingItem(data.shoppingItem).pipe(
-          map(() => AddItemSuccessAction({ shoppingItem: data.shoppingItem })),
+          map(() => addItemSuccessAction({ shoppingItem: data.shoppingItem })),
           catchError((error) => of(errorOccurred({ error })))
         )
       )
@@ -46,10 +46,10 @@ export class ShoppingEffects {
 
   deleteShoppingItem$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(DeleteItemAction),
+      ofType(deleteItemAction),
       mergeMap((data) =>
         this.shoppingService.deleteShoppingItem(data.itemId).pipe(
-          map(() => DeleteItemSuccessAction({ itemId: data.itemId })),
+          map(() => deleteItemSuccessAction({ itemId: data.itemId })),
           catchError((error) => of(errorOccurred({ error })))
         )
       )

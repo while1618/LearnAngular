@@ -13,31 +13,31 @@ export enum ShoppingActionTypes {
   DELETE_ITEM_FAILURE = '[SHOPPING] Delete Item Failure',
 }
 
-export const LoadShoppingAction = createAction(
+export const loadShoppingAction = createAction(
   ShoppingActionTypes.LOAD_SHOPPING
 );
 
-export const LoadShoppingSuccessAction = createAction(
+export const loadShoppingSuccessAction = createAction(
   ShoppingActionTypes.LOAD_SHOPPING_SUCCESS,
   props<{ shoppingList: Array<ShoppingItem> }>()
 );
 
-export const AddItemAction = createAction(
+export const addItemAction = createAction(
   ShoppingActionTypes.ADD_ITEM,
   props<{ shoppingItem: ShoppingItem }>()
 );
 
-export const AddItemSuccessAction = createAction(
+export const addItemSuccessAction = createAction(
   ShoppingActionTypes.ADD_ITEM_SUCCESS,
   props<{ shoppingItem: ShoppingItem }>()
 );
 
-export const DeleteItemAction = createAction(
+export const deleteItemAction = createAction(
   ShoppingActionTypes.DELETE_ITEM,
   props<{ itemId: string }>()
 );
 
-export const DeleteItemSuccessAction = createAction(
+export const deleteItemSuccessAction = createAction(
   ShoppingActionTypes.DELETE_ITEM_SUCCESS,
   props<{ itemId: string }>()
 );

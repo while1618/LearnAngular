@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
-  AddItemAction,
-  DeleteItemAction,
-  LoadShoppingAction,
+  addItemAction,
+  deleteItemAction,
+  loadShoppingAction,
 } from './store/actions/shopping.actions';
 import { AppState } from './store/models/app-state.model';
 import { ShoppingItem } from './store/models/shopping-item.model';
@@ -27,16 +27,16 @@ export class AppComponent implements OnInit {
     this.shoppingItems$ = this.store.select((store) => store.shopping.list);
     this.loading$ = this.store.select((store) => store.shopping.loading);
     this.error$ = this.store.select((store) => store.shopping.error);
-    this.store.dispatch(LoadShoppingAction());
+    this.store.dispatch(loadShoppingAction());
   }
 
   addItem() {
     this.newShoppingItem.id = uuid();
-    this.store.dispatch(AddItemAction({ shoppingItem: this.newShoppingItem }));
+    this.store.dispatch(addItemAction({ shoppingItem: this.newShoppingItem }));
     this.newShoppingItem = { id: '', name: '' };
   }
 
   deleteItem(id: string) {
-    this.store.dispatch(DeleteItemAction({ itemId: id }));
+    this.store.dispatch(deleteItemAction({ itemId: id }));
   }
 }

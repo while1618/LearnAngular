@@ -22,11 +22,6 @@ export const LoadShoppingSuccessAction = createAction(
   props<{ shoppingList: Array<ShoppingItem> }>()
 );
 
-export const LoadShoppingFailureAction = createAction(
-  ShoppingActionTypes.LOAD_SHOPPING_FAILURE,
-  props<{ error: Error }>()
-);
-
 export const AddItemAction = createAction(
   ShoppingActionTypes.ADD_ITEM,
   props<{ shoppingItem: ShoppingItem }>()
@@ -37,11 +32,6 @@ export const AddItemSuccessAction = createAction(
   props<{ shoppingItem: ShoppingItem }>()
 );
 
-export const AddItemFailureAction = createAction(
-  ShoppingActionTypes.ADD_ITEM_FAILURE,
-  props<{ error: Error }>()
-);
-
 export const DeleteItemAction = createAction(
   ShoppingActionTypes.DELETE_ITEM,
   props<{ itemId: string }>()
@@ -50,9 +40,4 @@ export const DeleteItemAction = createAction(
 export const DeleteItemSuccessAction = createAction(
   ShoppingActionTypes.DELETE_ITEM_SUCCESS,
   props<{ itemId: string }>()
-);
-
-export const DeleteItemFailureAction = createAction(
-  ShoppingActionTypes.DELETE_ITEM_FAILURE,
-  props<{ error: Error }>()
 );

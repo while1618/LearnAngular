@@ -1,13 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
+import { errorOccurred } from '../actions/error.actions';
 import {
   AddItemAction,
-  AddItemFailureAction,
   AddItemSuccessAction,
   DeleteItemAction,
-  DeleteItemFailureAction,
   DeleteItemSuccessAction,
   LoadShoppingAction,
-  LoadShoppingFailureAction,
   LoadShoppingSuccessAction,
 } from '../actions/shopping.actions';
 import { ShoppingItem } from '../models/shopping-item.model';
@@ -26,6 +24,11 @@ const initialState: ShoppingState = {
 
 export const ShoppingReducer = createReducer<ShoppingState>(
   initialState,
+  on(errorOccurred, (state, action) => ({
+    ...state,
+    error: action.error,
+    loading: false,
+  })),
   on(LoadShoppingAction, (state, action) => ({
     ...state,
     loading: true,
@@ -33,11 +36,6 @@ export const ShoppingReducer = createReducer<ShoppingState>(
   on(LoadShoppingSuccessAction, (state, action) => ({
     ...state,
     list: action.shoppingList,
-    loading: false,
-  })),
-  on(LoadShoppingFailureAction, (state, action) => ({
-    ...state,
-    error: action.error,
     loading: false,
   })),
   on(AddItemAction, (state, action) => ({
@@ -49,11 +47,6 @@ export const ShoppingReducer = createReducer<ShoppingState>(
     list: [...state.list, action.shoppingItem],
     loading: false,
   })),
-  on(AddItemFailureAction, (state, action) => ({
-    ...state,
-    error: action.error,
-    loading: false,
-  })),
   on(DeleteItemAction, (state, action) => ({
     ...state,
     loading: true,
@@ -61,11 +54,6 @@ export const ShoppingReducer = createReducer<ShoppingState>(
   on(DeleteItemSuccessAction, (state, action) => ({
     ...state,
     list: state.list.filter((item) => item.id !== action.itemId),
-    loading: false,
-  })),
-  on(DeleteItemFailureAction, (state, action) => ({
-    ...state,
-    error: action.error,
     loading: false,
   }))
 );

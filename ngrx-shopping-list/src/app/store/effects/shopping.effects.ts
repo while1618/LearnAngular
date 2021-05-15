@@ -3,15 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ShoppingService } from 'src/app/shopping.service';
+import { errorOccurred } from '../actions/error.actions';
 import {
   AddItemAction,
-  AddItemFailureAction,
   AddItemSuccessAction,
   DeleteItemAction,
-  DeleteItemFailureAction,
   DeleteItemSuccessAction,
   LoadShoppingAction,
-  LoadShoppingFailureAction,
   LoadShoppingSuccessAction,
 } from '../actions/shopping.actions';
 
@@ -28,7 +26,7 @@ export class ShoppingEffects {
       mergeMap(() =>
         this.shoppingService.getShoppingItem().pipe(
           map((data) => LoadShoppingSuccessAction({ shoppingList: data })),
-          catchError((error) => of(LoadShoppingFailureAction({ error })))
+          catchError((error) => of(errorOccurred({ error })))
         )
       )
     );
@@ -40,7 +38,7 @@ export class ShoppingEffects {
       mergeMap((data) =>
         this.shoppingService.addShoppingItem(data.shoppingItem).pipe(
           map(() => AddItemSuccessAction({ shoppingItem: data.shoppingItem })),
-          catchError((error) => of(AddItemFailureAction({ error })))
+          catchError((error) => of(errorOccurred({ error })))
         )
       )
     );
@@ -52,7 +50,7 @@ export class ShoppingEffects {
       mergeMap((data) =>
         this.shoppingService.deleteShoppingItem(data.itemId).pipe(
           map(() => DeleteItemSuccessAction({ itemId: data.itemId })),
-          catchError((error) => of(DeleteItemFailureAction({ error })))
+          catchError((error) => of(errorOccurred({ error })))
         )
       )
     );
